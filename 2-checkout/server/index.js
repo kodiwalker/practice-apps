@@ -41,15 +41,59 @@ app.get('/checkout', (req, res) => {
         }
       })
     })
-
 });
 
-app.patch('/checkout', (req, res) => {
 
+app.patch('/checkout/f1', (req, res) => {
+  const s_id = req.session_id;
+  const valsToUpdate = [req.body.name, req.body.email, req.body.password, req.body.f1complete, s_id];
+  db.query('Update orders Set name= ?, email= ?, password= ?, f1complete= ? Where s_id = ?;', valsToUpdate, (err, results) => {
+    if (err) {
+      console.error('Unable to update order:', err)
+      res.status(500).send('Unable to proceed. Refresh and try again.')
+    } else {
+      res.sendStatus(201);
+    }
+  })
+});
+
+app.patch('/checkout/f2', (req, res) => {
+  const s_id = req.session_id;
+  const valsToUpdate = [req.body.address, req.body.city, req.body.state, req.body.zip, req.body.phone, req.body.f2complete, s_id];
+  db.query('Update orders Set address= ?, city= ?, state= ?, zip= ?, phone= ?, f2complete= ? Where s_id = ?;', valsToUpdate, (err, results) => {
+    if (err) {
+      console.error('Unable to update order:', err)
+      res.status(500).send('Unable to proceed. Refresh and try again.')
+    } else {
+      res.sendStatus(201);
+    }
+  })
+});
+
+app.patch('/checkout/f3', (req, res) => {
+  const s_id = req.session_id;
+  const valsToUpdate = [req.body.cardnum, req.body.cardexp, req.body.cardcvv, req.body.cardzip, req.body.f3complete, s_id];
+  db.query('Update orders Set cardnum= ?, cardexp= ?, cardcvv= ?, cardzip= ?, f3complete= ? Where s_id = ?;', valsToUpdate, (err, results) => {
+    if (err) {
+      console.error('Unable to update order:', err)
+      res.status(500).send('Unable to proceed. Refresh and try again.')
+    } else {
+      res.sendStatus(201);
+    }
+  })
 });
 
 app.patch('/checkout/complete', (req, res) => {
-
+  const s_id = req.session_id;
+  const valsToUpdate = [req.body.purchased, s_id];
+  db.query('Update orders Set purchased = ? Where s_id = ?;', valsToUpdate, (err, results) => {
+    if (err) {
+      console.error('Unable to complete order:', err)
+      res.status(500).send('Unable to proceed. Refresh and try again.')
+    } else {
+      res.sendStatus(201);
+    }
+  })
 });
 
 
