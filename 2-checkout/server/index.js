@@ -4,7 +4,6 @@ const path = require("path");
 const sessionHandler = require("./middleware/session-handler");
 const logger = require("./middleware/logger");
 const db = require("./db");
-
 const app = express();
 
 // Adds `req.session_id` based on the incoming cookie value.
@@ -22,8 +21,6 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 //^                         --------------------------------
 
 app.get('/checkout', (req, res) => {
-  //^ See if req.session_id exists in DB, if not create row for it
-  //^ .then send row obj back in 201 res
   const s_id = req.session_id;
   db.query('Insert Into orders (s_id) Values (?) On Duplicate Key Update s_id=s_id;', [s_id],
     (err, results) => {
@@ -42,7 +39,6 @@ app.get('/checkout', (req, res) => {
       })
     })
 });
-
 
 app.patch('/checkout/f1', (req, res) => {
   const s_id = req.session_id;

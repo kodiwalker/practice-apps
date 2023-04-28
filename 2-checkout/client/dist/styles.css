@@ -4,7 +4,7 @@
  * 
  * Feel free to edit this file as needed.
  * 
- */ 
+ */
 
 *,
 *::before,
@@ -57,4 +57,66 @@ main {
   max-width: 840px;
   padding: 16px;
   margin: auto;
+}
+
+
+
+#root {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#modal-wrapper.fade-out {
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
+#modal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  animation: fadeIn 500ms ease-out;
+  z-index: 1000;
+}
+
+#modal {
+  min-width: 375px;
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  box-shadow: -4px 4px 2px 2px gray;
+  border-radius: 5px;
+  padding: 10px;
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+
 }
