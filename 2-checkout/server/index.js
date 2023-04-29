@@ -79,7 +79,7 @@ app.patch('/checkout/f3', (req, res) => {
   })
 });
 
-app.patch('/checkout/complete', (req, res) => {
+app.patch('/checkout/summary', (req, res) => {
   const s_id = req.session_id;
   const valsToUpdate = [req.body.purchased, s_id];
   db.query('Update orders Set purchased = ? Where s_id = ?;', valsToUpdate, (err, results) => {
